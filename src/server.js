@@ -5,7 +5,7 @@ import cors from 'cors';
 import {
   getAllContacts,
   getContactById,
-} from './controllers/contactsController';
+} from './controllers/contactsController.js';
 
 export function setupServer() {
   const app = express();
