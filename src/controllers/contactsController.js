@@ -9,7 +9,7 @@ export async function getAllContacts(req, res) {
       data: contacts,
     });
   } catch (error) {
-    res.status(500).json({ message: 'Server error' });
+    res.status(500).json({ message: 'Server error', error });
   }
 }
 export async function getContactById(req, res) {
@@ -22,6 +22,6 @@ export async function getContactById(req, res) {
       data: contact,
     });
   } catch (error) {
-    res.status(500).json({ message: 'Server error' });
+    res.status(500).json({ message: 'Server error', error });
   }
 }
