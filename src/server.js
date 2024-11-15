@@ -6,6 +6,7 @@ import {
   getAllContacts,
   getContactById,
 } from './controllers/contactsController.js';
+// import { env } from './utils/env.js';
 
 export function setupServer() {
   const app = express();
