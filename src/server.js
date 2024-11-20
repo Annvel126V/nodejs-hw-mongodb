@@ -8,7 +8,7 @@ import router from './routers/contacts.js';
 export function setupServer() {
   const app = express();
 
-  app.use('/api', router);
+  app.use('/contacts', router);
 
   app.use(cors());
   app.use(
