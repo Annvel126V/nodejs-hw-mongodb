@@ -6,6 +6,8 @@ import router from './routers/contacts.js';
 export function setupServer() {
   const app = express();
 
+  app.use(express.json());
+
   app.use('/contacts', router);
 
   app.use(cors());
