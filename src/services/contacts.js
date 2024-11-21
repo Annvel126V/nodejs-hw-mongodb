@@ -24,7 +24,7 @@ export const createContact = async ({
   });
   return await contact.save(); // Збереження контакту у базу даних
 };
-export const updatedContact = async (
+export const updateContact = async (
   id,
   name,
   phoneNumber,
