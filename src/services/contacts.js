@@ -24,19 +24,8 @@ export const createContact = async ({
   });
   return await contact.save(); // Збереження контакту у базу даних
 };
-export const updateContact = async (
-  id,
-  name,
-  phoneNumber,
-  email,
-  isFavourite,
-  contactType,
-) => {
-  return await Contact.findByIdAndUpdate(
-    id,
-    { name, phoneNumber, email, isFavourite, contactType },
-    { new: true },
-  );
+export const updateContact = async (contactId, updateData) => {
+  return await Contact.findByIdAndUpdate(contactId, updateData, { new: true });
 };
 export const deleteContact = async (id) => {
   return await Contact.findByIdAndDelete(id);
