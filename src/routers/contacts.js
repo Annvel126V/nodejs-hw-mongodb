@@ -13,6 +13,6 @@ const router = Router();
 router.get('/', ctrlWrapper(getAllContacts));
 router.get('/:contactId', ctrlWrapper(getContactById));
 router.post('/', ctrlWrapper(createContactController));
-router.put('/:contactId', ctrlWrapper(updatedContactController));
+router.patch('/:contactId', ctrlWrapper(updatedContactController));
 router.delete('/:contactId', ctrlWrapper(deleteContactController));
 export default router;
