@@ -3,12 +3,10 @@ import pino from 'pino-http';
 import cors from 'cors';
 import router from './routers/contacts.js';
 
-// import { env } from './utils/env.js';
-
 export function setupServer() {
   const app = express();
 
-  app.use('/api', router);
+  app.use('/contacts', router);
 
   app.use(cors());
   app.use(
