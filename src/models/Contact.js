@@ -5,10 +5,12 @@ const contactSchema = new Schema(
     name: {
       type: String,
       required: true,
+      versionKey: false,
     },
     phoneNumber: {
       type: String,
       required: true,
+      versionKey: false,
     },
     email: {
       type: String,
@@ -24,6 +26,7 @@ const contactSchema = new Schema(
       enum: ['work', 'home', 'personal'],
       default: 'personal',
       required: true,
+      versionKey: false,
     },
   },
   { timestamps: true },
