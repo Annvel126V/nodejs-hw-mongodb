@@ -35,13 +35,15 @@ export const getContactById = async (req, res, next) => {
 };
 export const createContactController = async (req, res, next) => {
   try {
-    const { name, phoneNumber, email, isFavourite, contactType } = req.body;
+    const { name, phoneNumber, email, isFavourite, contactType, versionKey } =
+      req.body;
     const newContact = await contactsService.createContact({
       name,
       phoneNumber,
       email,
       isFavourite,
       contactType,
+      versionKey,
     });
     res.status(201).json({
       status: 201,
