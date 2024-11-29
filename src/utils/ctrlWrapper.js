@@ -3,7 +3,9 @@ export default function ctrlWrapper(ctrl) {
     try {
       await ctrl(req, res, next);
     } catch (err) {
-      next(err);
+      if (err.isJoi) {
+        return;
+      }
     }
   };
 }
