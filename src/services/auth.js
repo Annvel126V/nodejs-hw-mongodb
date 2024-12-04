@@ -1,5 +1,6 @@
 import createHttpError from 'http-errors';
-import { User, Session } from '../models/user.js';
+import { User } from '../models/user.js';
+import { Session } from '../models/Session.js';
 import bcrypt from 'bcrypt';
 import { FIFTEEN_MINUTES, THIRTY_DAYS } from '../contacts/index.js';
 import { randomBytes } from 'crypto';
