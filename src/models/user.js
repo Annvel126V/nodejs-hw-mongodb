@@ -1,6 +1,6 @@
-import { model, Schema } from 'mongoose';
+import mongoose from 'mongoose';
 
-const usersSchema = new Schema(
+const userSchema = new mongoose.Schema(
   {
     name: {
       type: String,
@@ -22,11 +22,10 @@ const usersSchema = new Schema(
   },
 );
 
-usersSchema.methods.toJSON = function () {
+userSchema.methods.toJSON = function () {
   const obj = this.toObject();
   delete obj.password;
   return obj;
 };
 
-const User = model('User', usersSchema);
-module.exports = User;
+export const User = mongoose.model('User', userSchema);

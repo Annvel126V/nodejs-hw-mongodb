@@ -1,6 +1,6 @@
-import { model, Schema } from 'mongoose';
+import mongoose from 'mongoose';
 
-const sessionSchema = new Schema(
+const sessionSchema = new mongoose.Schema(
   {
     userId: {
       type: String,
@@ -29,6 +29,4 @@ const sessionSchema = new Schema(
   },
 );
 
-const Session = model('Session', sessionSchema);
-
-module.exports = Session;
+export const Session = mongoose.model('Session', sessionSchema);
