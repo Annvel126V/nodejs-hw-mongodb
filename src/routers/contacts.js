@@ -20,7 +20,7 @@ const jsonParser = express.json();
 router.get('/', ctrlWrapper(getAllContactsController));
 router.get('/:contactId', isValidId, ctrlWrapper(getContactByIdController));
 router.post(
-  '/',
+  '/register',
   jsonParser,
   validateBody(createContactSchema),
   ctrlWrapper(createContactController),

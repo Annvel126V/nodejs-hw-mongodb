@@ -8,7 +8,6 @@ const usersSchema = new Schema(
     },
     email: {
       type: String,
-      // email:,
       unique: true,
       required: true,
     },
@@ -22,6 +21,12 @@ const usersSchema = new Schema(
     versionKey: false,
   },
 );
+
+usersSchema.methods.toJSON = function () {
+  const obj = this.toObject();
+  delete obj.password;
+  return obj;
+};
 
 const User = model('User', usersSchema);
 module.exports = User;
