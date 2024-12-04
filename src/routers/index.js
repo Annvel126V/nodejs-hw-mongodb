@@ -1,10 +1,10 @@
 import { Router } from 'express';
-import contactRoutes from './contacts.js';
-import authRoutes from './auth.js';
+import ContactRoutes from './contacts.js';
+import AuthRoutes from './auth.js';
 
 const router = Router();
 
-router.use('/contacts', contactRoutes);
-router.use('/auth', authRoutes);
+router.use('/contacts', ContactRoutes);
+router.use('/auth', AuthRoutes);
 
 export default router;
