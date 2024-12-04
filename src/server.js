@@ -4,6 +4,7 @@ import cors from 'cors';
 import router from './routers/contacts.js';
 import { notFoundHandler } from './middlewares/notFoundHandler.js';
 import errorHandler from './middlewares/errorHandler.js';
+import cookieParser from 'cookie-parser';
 
 export function setupServer() {
   const app = express();
@@ -13,6 +14,8 @@ export function setupServer() {
 
   // Middleware для CORS
   app.use(cors());
+
+  app.use(cookieParser());
   // Логер Pino
   app.use(
     pino({
@@ -22,7 +25,7 @@ export function setupServer() {
     }),
   );
 
-  app.use('/contacts', router);
+  app.use('/contacts/', router);
 
   app.get('/', async (req, res) => {
     res.status(200).json({
