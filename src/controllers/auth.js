@@ -5,7 +5,7 @@ import {
   refreshUsersSesssion,
 } from '../services/auth.js';
 import { THIRTY_DAYS } from '../contacts/index.js';
-import { Session } from '../models/Session.js';
+
 export const registerUserController = async (req, res) => {
   const payload = {
     name: req.body.name,
@@ -14,7 +14,7 @@ export const registerUserController = async (req, res) => {
   };
   const registeredUser = await registerUser(payload);
 
-  res.send({
+  res.status(201).json({
     status: 201,
     message: 'Successfully registered a user!',
     data: registeredUser,
@@ -22,22 +22,21 @@ export const registerUserController = async (req, res) => {
 };
 
 export const loginUserController = async (req, res) => {
-  const { email, password } = req.body;
-  res.cookie('refreshToken', Session.refreshToken, {
+  const session = await loginUser(req.body);
+  res.cookie('refreshToken', session.refreshToken, {
     httpOnly: true,
     expires: new Date(Date.now() + THIRTY_DAYS),
   });
-  res.cookie('sessionId', Session._Id, {
+  res.cookie('sessionId', session._id, {
     httpOnly: true,
     expires: new Date(Date.now() + THIRTY_DAYS),
   });
-  await loginUser(email, password);
 
-  res.send({
+  res.status(200).json({
     status: 200,
     message: 'Successfully logged in an user!',
     data: {
-      accessToken: Session.accessToken,
+      accessToken: session.accessToken,
     },
   });
 };
