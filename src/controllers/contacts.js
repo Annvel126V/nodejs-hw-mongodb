@@ -49,12 +49,20 @@ export const getContactByIdController = async (req, res, next) => {
 };
 export const createContactController = async (req, res, next) => {
   try {
-    const { name, phoneNumber, email, isFavourite, contactType, versionKey } =
-      req.body;
+    const {
+      name,
+      phoneNumber,
+      email,
+      role,
+      isFavourite,
+      contactType,
+      versionKey,
+    } = req.body;
     const newContact = await contactsService.createContact({
       name,
       phoneNumber,
       email,
+      role,
       isFavourite,
       contactType,
       versionKey,
