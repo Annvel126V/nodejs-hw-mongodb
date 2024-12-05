@@ -24,7 +24,7 @@ const sessionSchema = new mongoose.Schema(
     },
   },
   {
-    timestamps: true, // Автоматично додає поля createdAt і updatedAt
+    timestamps: true,
     versionKey: false,
   },
 );
