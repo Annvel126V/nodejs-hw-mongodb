@@ -26,11 +26,11 @@ router.post(
   ctrlWrapper(loginUserController),
 );
 
-router.post('/logout', jsonParser, ctrlWrapper(logoutUserController));
+router.post('/logout', ctrlWrapper(logoutUserController));
 
 router.post(
   '/refresh',
-  jsonParser,
+
   ctrlWrapper(refreshUsersSesssionController),
 );
 
