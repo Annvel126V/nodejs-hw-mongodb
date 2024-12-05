@@ -28,10 +28,6 @@ router.post(
 
 router.post('/logout', ctrlWrapper(logoutUserController));
 
-router.post(
-  '/refresh',
-
-  ctrlWrapper(refreshUsersSesssionController),
-);
+router.post('/refresh', ctrlWrapper(refreshUsersSesssionController));
 
 export default router;
