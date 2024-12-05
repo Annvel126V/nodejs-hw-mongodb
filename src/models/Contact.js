@@ -22,6 +22,7 @@ const contactSchema = new mongoose.Schema(
     role: {
       type: String,
       enum: [ROLES.USER],
+      required: true,
     },
 
     isFavourite: {
