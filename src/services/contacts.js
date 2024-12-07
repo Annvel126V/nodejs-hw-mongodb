@@ -47,8 +47,8 @@ export const getAllContacts = async ({
   };
 };
 
-export const getContactById = async (contactId) => {
-  return await Contact.findById(contactId);
+export const getContactById = async (contactId, userId) => {
+  return await Contact.findById(contactId, userId);
 };
 
 export const createContact = async ({
@@ -64,6 +64,7 @@ export const createContact = async ({
     email,
     isFavourite,
     contactType,
+    // userId: req.user._id,
   });
   return await contact.save(); // Збереження контакту у базу даних
 };

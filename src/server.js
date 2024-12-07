@@ -25,7 +25,7 @@ export function setupServer() {
     }),
   );
 
-  app.use('/contacts/', router);
+  app.use('/', router);
 
   app.get('/', async (req, res) => {
     res.status(200).json({
