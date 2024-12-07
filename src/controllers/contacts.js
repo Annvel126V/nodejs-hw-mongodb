@@ -5,11 +5,13 @@ import { parseSortParams } from '../utils/parseSortParams.js';
 // import createHttpError from 'http-errors';
 
 export const getAllContactsController = async (req, res) => {
+  const userId = req.user._id; // Отримання userId з токена або сесії
   const { page, perPage } = parsePaginationParams(req.query);
   const { sortBy, sortOrder } = parseSortParams(req.query);
   const filter = parseFilterParams(req.query);
 
   const contacts = await contactsService.getAllContacts({
+    userId,
     page,
     perPage,
     sortBy,
@@ -49,6 +51,7 @@ export const getContactByIdController = async (req, res, next) => {
 };
 export const createContactController = async (req, res, next) => {
   try {
+    const userId = req.user._id; // Витягуємо userId з авторизації
     const {
       name,
       phoneNumber,
@@ -66,6 +69,7 @@ export const createContactController = async (req, res, next) => {
       isFavourite,
       contactType,
       versionKey,
+      userId, // Передаємо userId
     });
     res.status(201).json({
       status: 201,
