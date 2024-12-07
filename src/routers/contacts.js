@@ -27,7 +27,7 @@ router.get(
   ctrlWrapper(getContactByIdController),
 );
 router.post(
-  '/register',
+  '/',
 
   jsonParser,
   validateBody(createContactSchema),
