@@ -2,7 +2,7 @@ import {
   registerUser,
   loginUser,
   logoutUser,
-  refreshUsersSesssion,
+  refreshUsersSession,
 } from '../services/auth.js';
 import { THIRTY_DAYS } from '../contacts/index.js';
 
@@ -51,18 +51,18 @@ export const logoutUserController = async (req, res) => {
   res.status(204).end();
 };
 
-const setupSession = (res, Session) => {
-  res.cookie('refreshToken', Session.refreshToken, {
+const setupSession = (res, session) => {
+  res.cookie('refreshToken', session.refreshToken, {
     httpOnly: true,
     expires: new Date(Date.now() + THIRTY_DAYS),
   });
-  res.cookie('sessionId', Session._Id, {
+  res.cookie('sessionId', session._Id, {
     httpOnly: true,
     expires: new Date(Date.now() + THIRTY_DAYS),
   });
 };
-export const refreshUsersSesssionController = async (req, res) => {
-  const session = await refreshUsersSesssion({
+export const refreshUsersSessionController = async (req, res) => {
+  const session = await refreshUsersSession({
     sessionId: req.cookies.sessionId,
     refreshToken: req.cookies.refreshToken,
   });

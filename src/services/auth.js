@@ -15,14 +15,15 @@ export const registerUser = async (payload) => {
   return User.create(payload);
 };
 
-export const loginUser = async (email, password) => {
-  const user = await User.findOne({ email });
+export const loginUser = async (payload) => {
+  const user = await User.findOne({ email: payload.email });
   if (!user) {
-    throw createHttpError(401, 'Email or password is incorrect');
+    throw createHttpError(404, 'User not found');
   }
-  const isMatch = await bcrypt.compare(password, user.password);
-  if (isMatch !== true) {
-    throw createHttpError(401, 'Email or password is incorrect');
+  const isEqual = await bcrypt.compare(payload.password, user.password);
+
+  if (!isEqual) {
+    throw createHttpError(401, 'Unauthorized');
   }
 
   await Session.deleteOne({ userId: user._id });
@@ -54,7 +55,7 @@ const createSession = () => {
   };
 };
 
-export const refreshUsersSesssion = async ({ sessionId, refreshToken }) => {
+export const refreshUsersSession = async ({ sessionId, refreshToken }) => {
   const session = await Session.findById({
     _id: sessionId,
     refreshToken,
