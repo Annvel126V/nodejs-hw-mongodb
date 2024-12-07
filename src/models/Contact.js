@@ -1,4 +1,4 @@
-import mongoose, { Schema } from 'mongoose';
+import mongoose from 'mongoose';
 import { ROLES } from '../contacts/index.js';
 
 const contactSchema = new mongoose.Schema(
@@ -37,7 +37,7 @@ const contactSchema = new mongoose.Schema(
       required: true,
     },
     userId: {
-      type: Schema.Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: 'users',
       required: true,
     },
