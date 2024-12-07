@@ -64,7 +64,7 @@ export const createContact = async ({
     email,
     isFavourite,
     contactType,
-    // userId: req.user._id,
+    userId: req.user._id,
   });
   return await contact.save(); // Збереження контакту у базу даних
 };
