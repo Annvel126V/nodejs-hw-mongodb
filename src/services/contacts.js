@@ -52,23 +52,12 @@ export const getContactById = async (contactId, userId) => {
   return await Contact.findOne({ _id: contactId, userId });
 };
 
-export const createContact = async ({
-  name,
-  phoneNumber,
-  email,
-  isFavourite = false,
-  contactType,
-  userId, // Отримуємо userId
-}) => {
-  const contact = new Contact({
-    name,
-    phoneNumber,
-    email,
-    isFavourite,
-    contactType,
-    userId, // Прив'язуємо контакт до користувача
+export const createContact = async (contact, user) => {
+  const newContact = await Contact.create({
+    ...contact,
+    userId: user._id,
   });
-  return await contact.save(); // Збереження контакту у базу даних
+  return newContact;
 };
 export const updateContact = async (contactId, updateData, userId) => {
   return await Contact.findOneAndUpdate(
