@@ -2,16 +2,14 @@ import * as contactsService from '../services/contacts.js';
 import { parseFilterParams } from '../utils/parseFilterParams.js';
 import { parsePaginationParams } from '../utils/parsePaginationParams.js';
 import { parseSortParams } from '../utils/parseSortParams.js';
-// import createHttpError from 'http-errors';
 
 export const getAllContactsController = async (req, res) => {
-  const userId = req.user._id; // Отримання userId з токена або сесії
   const { page, perPage } = parsePaginationParams(req.query);
   const { sortBy, sortOrder } = parseSortParams(req.query);
   const filter = parseFilterParams(req.query);
 
   const contacts = await contactsService.getAllContacts({
-    userId,
+    userId: req.user._id,
     page,
     perPage,
     sortBy,
@@ -27,7 +25,10 @@ export const getAllContactsController = async (req, res) => {
 export const getContactByIdController = async (req, res, next) => {
   const { contactId } = req.params;
   try {
-    const contact = await contactsService.getContactById(contactId);
+    const contact = await contactsService.getContactById(
+      contactId,
+      req.user._id,
+    );
     if (!contact) {
       return res.status(400).json({
         status: 400,
@@ -51,7 +52,6 @@ export const getContactByIdController = async (req, res, next) => {
 };
 export const createContactController = async (req, res, next) => {
   try {
-    const userId = req.user._id; // Витягуємо userId з авторизації
     const {
       name,
       phoneNumber,
@@ -61,7 +61,7 @@ export const createContactController = async (req, res, next) => {
       contactType,
       versionKey,
     } = req.body;
-    const newContact = await contactsService.createContact({
+    const newContact = await contactsService.createContact(req.user._id, {
       name,
       phoneNumber,
       email,
@@ -69,7 +69,6 @@ export const createContactController = async (req, res, next) => {
       isFavourite,
       contactType,
       versionKey,
-      userId, // Передаємо userId
     });
     res.status(201).json({
       status: 201,
@@ -84,13 +83,17 @@ export const updateContactController = async (req, res, next) => {
   try {
     const { contactId } = req.params;
     const { name, phoneNumber, email, isFavourite, contactType } = req.body;
-    const updateContact = await contactsService.updateContact(contactId, {
-      name,
-      phoneNumber,
-      email,
-      isFavourite,
-      contactType,
-    });
+    const updateContact = await contactsService.updateContact(
+      contactId,
+      req.user._id,
+      {
+        name,
+        phoneNumber,
+        email,
+        isFavourite,
+        contactType,
+      },
+    );
     if (!updateContact) {
       return res.status(404).json({
         status: 404,
@@ -111,7 +114,10 @@ export const updateContactController = async (req, res, next) => {
 export const deleteContactController = async (req, res, next) => {
   try {
     const { contactId } = req.params;
-    const deleteContact = await contactsService.deleteContact(contactId);
+    const deleteContact = await contactsService.deleteContact(
+      contactId,
+      req.user._id,
+    );
     if (!deleteContact) {
       return res.status(404).json({
         status: 404,

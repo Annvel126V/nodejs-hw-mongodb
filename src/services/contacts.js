@@ -49,7 +49,7 @@ export const getAllContacts = async ({
 };
 
 export const getContactById = async (contactId, userId) => {
-  return await Contact.findByOne({ _id: contactId, userId });
+  return await Contact.findOne({ _id: contactId, userId });
 };
 
 export const createContact = async ({
@@ -71,12 +71,12 @@ export const createContact = async ({
   return await contact.save(); // Збереження контакту у базу даних
 };
 export const updateContact = async (contactId, updateData, userId) => {
-  return await Contact.findByIdAndUpdate(
+  return await Contact.findOneAndUpdate(
     { _id: contactId, userId }, // Додано фільтр за userId
     updateData,
     { new: true },
   );
 };
 export const deleteContact = async (id, userId) => {
-  return await Contact.findByIdAndDelete({ _id: id, userId }); // Додано фільтр за userId
+  return await Contact.findOneAndDelete({ _id: id, userId }); // Додано фільтр за userId
 };
