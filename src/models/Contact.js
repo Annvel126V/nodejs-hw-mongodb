@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-import { ROLES } from '../contacts/index.js';
 
 const contactSchema = new mongoose.Schema(
   {
@@ -13,15 +12,6 @@ const contactSchema = new mongoose.Schema(
     },
     email: {
       type: String,
-      required: false,
-    },
-    password: {
-      type: String,
-      required: true,
-    },
-    role: {
-      type: String,
-      enum: [ROLES.USER],
       required: false,
     },
 
