@@ -7,7 +7,7 @@ export const getAllContacts = async ({
   perPage = 10,
   sortOrder = SORT_ORDER.ASC,
   sortBy = '_id',
-  filter,
+  filter = {},
   userId,
 }) => {
   const limit = perPage;
@@ -59,13 +59,32 @@ export const createContact = async (contact, user) => {
   });
   return newContact;
 };
-export const updateContact = async (contactId, updateData, userId) => {
-  return await Contact.findOneAndUpdate(
-    { _id: contactId, userId }, // Додано фільтр за userId
-    updateData,
-    { new: true },
+export const updateContact = async (
+  contactId,
+  contact,
+  userId,
+  options = {},
+) => {
+  const rawResult = await Contact.findOneAndUpdate(
+    {
+      _id: contactId,
+      userId,
+    },
+    contact,
+    {
+      new: true,
+      includeResultMetadata: true,
+      ...options,
+    },
   );
+
+  if (!rawResult || !rawResult.value) return null;
+
+  return {
+    contact: rawResult.value,
+    isNew: Boolean(rawResult?.lastErrorObject?.upserted),
+  };
 };
-export const deleteContact = async (id, userId) => {
-  return await Contact.findOneAndDelete({ _id: id, userId }); // Додано фільтр за userId
+export const deleteContact = async (contactId, userId) => {
+  return await Contact.findOneAndDelete({ _id: contactId, userId });
 };

@@ -62,17 +62,13 @@ export const updateContactController = async (req, res, next) => {
   try {
     const { contactId } = req.params;
     const { name, phoneNumber, email, isFavourite, contactType } = req.body;
+
     const updateContact = await contactsService.updateContact(
       contactId,
-      req.user._id,
-      {
-        name,
-        phoneNumber,
-        email,
-        isFavourite,
-        contactType,
-      },
+      { name, phoneNumber, email, isFavourite, contactType }, // Передаємо об'єкт оновлення
+      req.user._id, // Передаємо userId
     );
+
     if (!updateContact) {
       return res.status(404).json({
         status: 404,
@@ -80,7 +76,7 @@ export const updateContactController = async (req, res, next) => {
         data: null,
       });
     }
-    // throw createHttpError(404, 'Contact not found');
+
     res.status(200).json({
       status: 200,
       message: 'Successfully patched a contact!',
