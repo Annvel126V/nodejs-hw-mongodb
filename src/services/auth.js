@@ -143,7 +143,7 @@ export const resetPassword = async (payload) => {
     throw err;
   }
 
-  const user = User.findOne({
+  const user = await User.findOne({
     email: entries.email,
     _id: entries.sub,
   });
