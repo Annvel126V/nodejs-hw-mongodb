@@ -1,0 +1,27 @@
+openapi: 3.1.0
+info:
+  version: 1.0.0
+  title: <Phoneboock node.js>
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  description: <Phoneboock>
+tags:
+  # теги, що ви будете використовувати
+servers:
+  - url: http://localhost:5000
+  - url: #посилання на задеплоєний сайт
+paths:
+  /contacts:
+    get:
+      $ref: ../swagger/paths/contacts/get.yaml
+
+      $ref: ../swagger/paths/contacts/post.yaml 
+  /students/{id}:
+    get:
+      $ref: ../swagger/paths/contacts/{id}/get.yaml
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
