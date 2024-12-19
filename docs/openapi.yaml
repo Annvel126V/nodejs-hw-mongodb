@@ -5,9 +5,10 @@ info:
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
-  description: <Phoneboock>
+  description: <Phoneboock in app>
 tags:
-  # теги, що ви будете використовувати
+  -name: Contacts
+  description: Operation whit contacts
 servers:
   - url: http://localhost:5000
   - url: https://nodejs-hw-mongodb-rghb.onrender.com
