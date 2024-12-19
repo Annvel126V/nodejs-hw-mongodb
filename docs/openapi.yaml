@@ -10,7 +10,7 @@ tags:
   # теги, що ви будете використовувати
 servers:
   - url: http://localhost:5000
-  - url: #посилання на задеплоєний сайт
+  - url: https://nodejs-hw-mongodb-rghb.onrender.com
 paths:
   /contacts:
     get:
