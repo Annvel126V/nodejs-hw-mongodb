@@ -81,6 +81,7 @@ export const updateContactController = async (req, res, next) => {
   const { contactId } = req.params;
   const photo = req.file;
 
+
   let photoUrl;
 
   if (photo) {
@@ -88,8 +89,23 @@ export const updateContactController = async (req, res, next) => {
       photoUrl = await saveFileToCloudinary(photo);
     } else {
       photoUrl = await saveFileToUploadDir(photo);
+
+    const updatedContact = await contactsService.updateContact(
+      contactId,
+      { name, phoneNumber, email, isFavourite, contactType }, // Передаємо об'єкт оновлення
+      req.user._id, // Передаємо userId
+    );
+
+    if (!updatedContact) {
+      return res.status(404).json({
+        status: 404,
+        message: 'Contact not found',
+        data: null,
+      });
+
     }
   }
+
 
   const result = await contactsService.updateContact(
     contactId,
@@ -103,6 +119,15 @@ export const updateContactController = async (req, res, next) => {
   if (!result) {
     next(createHttpError(404, 'Contact not found'));
     return;
+
+    res.status(200).json({
+      status: 200,
+      message: 'Successfully patched a contact!',
+      data: updatedContact, // Повертаємо лише оновлений контакт
+    });
+  } catch (error) {
+    next(error);
+
   }
 
   res.json({

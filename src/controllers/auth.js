@@ -4,8 +4,13 @@ import {
   logoutUser,
   refreshUsersSession,
   requestResetToken,
+
   resetPassword,
+
   loginOrSignupWithGoogle,
+
+
+
 } from '../services/auth.js';
 import { THIRTY_DAYS } from '../contacts/index.js';
 import { generateAuthUrl } from '../utils/googleOAuth2.js';
@@ -85,6 +90,7 @@ export const refreshUsersSessionController = async (req, res) => {
 export const requestResetEmailController = async (req, res) => {
   await requestResetToken(req.body.email);
   res.json({
+
     status: 200,
     message: 'Reset password email has been successfully sent.',
     data: {},
@@ -96,6 +102,10 @@ export const resetPasswordController = async (req, res) => {
   res.json({
     status: 200,
     message: 'Password was successfully reset',
+
+    message: 'Reset password email was successfully sent!',
+    status: 200,
+
     data: {},
   });
 };
