@@ -8,7 +8,7 @@ info:
   description: <Phoneboock in app>
 tags:
   -name: Contacts
-  description: Operation whit contacts
+  description: Operation whit contacs
 servers:
   - url: http://localhost:5000
   - url: https://nodejs-hw-mongodb-rghb.onrender.com
