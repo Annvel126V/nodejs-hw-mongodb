@@ -4,8 +4,8 @@ required:
   - name
   - phoneNumber
   - email
-  - isFavourite
   - contactType
+  - userId
 properties:
   _id:
     description: 'contacts id'
@@ -19,10 +19,10 @@ properties:
     description: 'contacts phoneNumber'
     type: number
     example: +380672222222
-  isFavourite:
-    description: 'contacts favourite status'
-    type: boolean
-    example: true
+  email:
+    description: 'Contact email address'
+    type: string
+    example: john.doe@example.com
   contactType:
     description: 'contacts type'
     type: string
@@ -31,3 +31,7 @@ properties:
     description: 'Link to contacts photo'
     type: string
     example: https://res.cloudinary.com/uqwgdu/image/upload/image.png
+  userId:
+    description: 'ID of the user who owns this contact'
+    type: string
+    example: 123e4567-e89b-12d3-a456-426614174000
