@@ -522,7 +522,6 @@
           "_id",
           "name",
           "phoneNumber",
-          "email",
           "contactType",
           "userId"
         ],
@@ -541,6 +540,11 @@
             "description": "contacts phoneNumber",
             "type": "number",
             "example": 380672222222
+          },
+          "isFavourite": {
+            "description": "contacts favourite status",
+            "type": "boolean",
+            "example": true
           },
           "email": {
             "description": "Contact email address",
