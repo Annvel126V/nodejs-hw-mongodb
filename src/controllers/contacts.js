@@ -34,8 +34,8 @@ export const getContactByIdController = async (req, res, next) => {
       req.user._id,
     );
     if (!contact) {
-      return res.status(400).json({
-        status: 400,
+      return res.status(404).json({
+        status: 404,
         message: 'Contact not found',
         data: {
           message: 'Id is not valid',
@@ -108,7 +108,7 @@ export const updateContactController = async (req, res, next) => {
   res.json({
     status: 200,
     message: 'Successfully patched a contact!',
-    data: result.contact,
+    data: result,
   });
 };
 
