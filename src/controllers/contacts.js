@@ -36,9 +36,8 @@ export const getContactByIdController = async (req, res, next) => {
     if (!contact) {
       return res.status(404).json({
         status: 404,
-        message: 'Contact not found',
         data: {
-          message: 'Id is not valid',
+          message: 'Contact not found',
         },
       });
 
